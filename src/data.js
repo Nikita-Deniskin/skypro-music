@@ -1,11 +1,12 @@
 const tracks = [
-    {
+  {
     id: 0,
     name: 'Guilt',
     author: 'Nero',
     album: 'Welcome Reality',
     isliked: false,
-    time: '4:44'
+    time: '4:44',
+    genre: 'Альтернатива',
   },
   {
     id: 1,
@@ -13,7 +14,8 @@ const tracks = [
     author: 'Dynoro, Outwork, Mr. Gee',
     album: 'Elektro',
     isliked: false,
-    time: '2:22'
+    time: '2:22',
+    genre: 'Реп',
   },
   {
     id: 2,
@@ -21,7 +23,8 @@ const tracks = [
     author: 'Ali Bakgor',
     album: 'I’m Fire',
     isliked: false,
-    time: '2:22'
+    time: '2:22',
+    genre: 'Поп-музыка',
   },
   {
     id: 3,
@@ -30,7 +33,8 @@ const tracks = [
     author: 'Стоункат, Psychopath',
     album: 'Non Stop',
     isliked: false,
-    time: '4:12'
+    time: '4:12',
+    genre: 'Техно',
   },
   {
     id: 4,
@@ -39,33 +43,37 @@ const tracks = [
     author: 'Jaded, Will Clarke, AR/CO',
     album: 'Run Run',
     isliked: false,
-    time: '2:54'
+    time: '2:54',
+    genre: 'Инди',
   },
   {
-  id: 5,
-  name: 'Eyes on Fire',
-  remix: 'Zeds Dead Remix',
-  author: 'Blue Foundation, Zeds Dead',
-  album: 'Eyes on Fire',
-  isliked: false,
-  time: '5:20'
-},
-{
+    id: 5,
+    name: 'Eyes on Fire',
+    remix: 'Zeds Dead Remix',
+    author: 'Blue Foundation, Zeds Dead',
+    album: 'Eyes on Fire',
+    isliked: false,
+    time: '5:20',
+    genre: 'Рок',
+  },
+  {
     id: 6,
     name: 'Mucho Bien',
     remix: 'Hi Profile Remix',
     author: 'HYBIT, Mr. Black, Offer Nissim, Hi Profile',
     album: 'Mucho Bien',
     isliked: false,
-    time: '3:41'
+    time: '3:41',
+    genre: 'Поп-музыка',
   },
-    {
+  {
     id: 7,
     name: 'Knives n Cherries',
     author: 'minthaze',
     album: 'Captivating',
     isliked: false,
-    time: '1:48'
+    time: '1:48',
+    genre: 'Техно',
   },
   {
     id: 8,
@@ -73,7 +81,8 @@ const tracks = [
     author: 'Calvin Harris, Disciples',
     album: 'How Deep Is Your Love',
     isliked: false,
-    time: '3:32'
+    time: '3:32',
+    genre: 'Рок',
   },
   {
     id: 9,
@@ -81,7 +90,24 @@ const tracks = [
     author: 'Tom Boxer',
     album: 'Soundz Made in Romania',
     isliked: false,
-    time: '3:36'
-  }
-];
-export default tracks;
+    time: '3:36',
+    genre: 'Инди',
+  },
+]
+const playLists = [
+  {
+    id: 0,
+    src: 'img/playlist01.png',
+  },
+  {
+    id: 1,
+    src: 'img/playlist02.png',
+  },
+  {
+    id: 2,
+    src: 'img/playlist03.png',
+  },
+]
+
+export { tracks }
+export { playLists }
