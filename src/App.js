@@ -1,10 +1,10 @@
-import './App.css'
 import { useEffect, useState } from 'react'
+import * as S from './App.styles'
 import { tracks, playLists } from './data'
 import Navigation from './components/navmenu/NavMenu'
-import Player from './components/audioplayer/AudioPlayer'
+import Player from './components/player/AudioPlayer'
 import Sidebar from './components/sidebar/Sidebar'
-import TrackList from './components/tracklist/Tracklist'
+import TrackList from './components/traklist/Tracklist'
 
 function App() {
   const [content, setContent] = useState({})
@@ -24,9 +24,9 @@ function App() {
 
   return (
     <div className="App">
-      <div className="wrapper">
-        <div className="container">
-          <main className="main">
+      <S.wrapper>
+        <S.container>
+          <S.main>
             <Navigation />
             {loading && (
               <>
@@ -42,10 +42,10 @@ function App() {
                 <Player prop={content.player} />
               </>
             )}
-          </main>
+          </S.main>
           <footer className="footer" />
-        </div>
-      </div>
+        </S.container>
+      </S.wrapper>
     </div>
   )
 }

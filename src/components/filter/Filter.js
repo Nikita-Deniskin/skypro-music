@@ -1,20 +1,18 @@
-import { useState } from 'react';
-import FilterCategory from './FilterButton';
-import { tracks } from '../../data';
-import './Filter.css';
+import { useState } from 'react'
+import FilterCategory from './FilterButton'
+import { tracks } from '../../data'
+import * as S from './filter.styles'
 
 export default function Filter() {
   const [activeCategory, setActiveCategory] = useState('')
 
   return (
-    <div className="centerblock__filter ">
-      <div className="filter__title">Искать по:</div>
+    <S.centerblockFilter>
+      <S.filterTitle>Искать по:</S.filterTitle>
       <FilterCategory
         title="исполнителю"
         content={tracks.map((track) => (
-          <li key={track.id} className="filter__item">
-            {track.author}
-          </li>
+          <S.filterItem key={track.id}>{track.author}</S.filterItem>
         ))}
         isActive={activeCategory}
         setActive={setActiveCategory}
@@ -25,15 +23,9 @@ export default function Filter() {
         setActive={setActiveCategory}
         content={
           <>
-            <li key={1} className="filter__item">
-              По умолчанию
-            </li>
-            <li key={2} className="filter__item">
-              Сначала новые
-            </li>
-            <li key={3} className="filter__item">
-              Сначала старые
-            </li>
+            <S.filterItem key={1}>По умолчанию</S.filterItem>
+            <S.filterItem key={2}>Сначала новые</S.filterItem>
+            <S.filterItem key={3}>Сначала старые</S.filterItem>
           </>
         }
       />
@@ -42,11 +34,9 @@ export default function Filter() {
         isActive={activeCategory}
         setActive={setActiveCategory}
         content={tracks.map((track) => (
-          <li key={track.id} className="filter__item">
-            {track.genre}
-          </li>
+          <S.filterItem key={track.id}>{track.genre}</S.filterItem>
         ))}
       />
-    </div>
+    </S.centerblockFilter>
   )
 }

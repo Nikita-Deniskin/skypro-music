@@ -1,43 +1,43 @@
-import './Sidebar.css';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import * as S from './Sidebar.styles'
 
 export default function Sidebar({ array }) {
   const listItems = array
     ? array.map((item) => (
-        <li key={item.id} className="sidebar__item">
-          <a className="sidebar__link" href="http://">
-            <img className="sidebar__img" src={item.src} alt="day's playlist" />
-          </a>
-        </li>
+        <S.sidebarItem key={item.id}>
+          <S.sidebarLink href="#">
+            <S.sidebarImg src={item.src} alt="day's playlist" />
+          </S.sidebarLink>
+        </S.sidebarItem>
       ))
     : Array(3)
         .fill()
         .map(() => (
-          <li key={Math.random()} className="sidebar__item">
+          <S.sidebarItem key={Math.random()}>
             <Skeleton />
-          </li>
+          </S.sidebarItem>
         ))
   return (
-    <div className="main__sidebar sidebar">
-      <div className="sidebar__personal">
-        <p className="sidebar__personal-name">Sergey.Ivanov</p>
-        <div className="sidebar__icon">
+    <S.mainSidebar className="sidebar">
+      <S.sidebarPersonal>
+        <S.sidebarPersonalName>Sergey.Ivanov</S.sidebarPersonalName>
+        <S.sidebarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>
-        </div>
-      </div>
-      <div className="sidebar__block">
+        </S.sidebarIcon>
+      </S.sidebarPersonal>
+      <S.sidebarBlock>
         <SkeletonTheme
           baseColor="#313131"
           highlightColor="#444"
           height={150}
           width={250}
         >
-          <ul className="sidebar__list">{listItems}</ul>
+          <S.sidebarList>{listItems}</S.sidebarList>
         </SkeletonTheme>
-      </div>
-    </div>
+      </S.sidebarBlock>
+    </S.mainSidebar>
   )
 }
