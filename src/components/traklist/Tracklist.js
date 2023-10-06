@@ -2,7 +2,7 @@ import * as S from './Tracklist.styles'
 import GetTrack from './Track'
 import Filter from '../filter/Filter'
 
-export default function TrackList({ tracks }) {
+export default function TrackList({ tracks, title }) {
   return (
     <S.mainCentalBlock>
       <S.centalBlockSearch className="search">
@@ -16,8 +16,8 @@ export default function TrackList({ tracks }) {
           name="search"
         />
       </S.centalBlockSearch>
-      <S.centalBlockH2>Треки</S.centalBlockH2>
-      <Filter />
+      <S.centalBlockH2>{title || 'Треки'}</S.centalBlockH2>
+      {!title &&(<Filter />)}
       <S.centalBlockContent>
         <S.contentTitle className="playlist-title">
           <S.playlistTitleCol01>Трек</S.playlistTitleCol01>

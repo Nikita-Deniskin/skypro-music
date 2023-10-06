@@ -179,7 +179,7 @@ export const volumeContent = styled.div`
   flex-direction: row;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
+  // align-items: center;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -192,4 +192,21 @@ export const volumeProgress = styled.div`
 export const volumeProgressLine = styled.input`
   width: 109px;
   cursor: pointer;
+  -webkit-appearance: none;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background: #1a1a1a;
+    border: 2px solid #fff;
+    margin-top: calc(2px * 0.5 - max(10px * 0.5, 2px));
+  }
+  &::-webkit-slider-runnable-track {
+    height: 2px;
+    border: none;
+    border-radius: 0.5em;
+    background: #797979;
+    box-shadow: none;
+  }
 `

@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as S from './NavMenu.styles'
 
 export default function Navigation() {
+  const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
   const toggleVisibility = () => setVisible(!visible)
   return (
     <S.mainNav>
-      <S.navLogo>
-        <S.logoImage src="img/logo.png" alt="logo" />
+      <S.navLogo as="button" onClick={() => navigate('/', { replace: true })}>
+        <S.logoImage src="/img/logo.png" alt="logo" />
       </S.navLogo>
       <S.navBurger type="button" onClick={toggleVisibility}>
         <S.burgerLine />
@@ -18,13 +20,31 @@ export default function Navigation() {
         <S.navMenu>
           <S.menuList>
             <S.menuItem>
-              <S.menuLink href="#">Главное</S.menuLink>
+              <S.menuLink
+                as="button"
+                onClick={() => navigate('/', { replace: false })}
+              >
+                Главное
+              </S.menuLink>
             </S.menuItem>
             <S.menuItem>
-              <S.menuLink href="#">Мой плейлист</S.menuLink>
+              <S.menuLink
+                as="button"
+                onClick={() => navigate('/favorites', { replace: false })}
+              >
+                Мои треки
+              </S.menuLink>
             </S.menuItem>
             <S.menuItem>
-              <S.menuLink href="../signin.html">Войти</S.menuLink>
+              <S.menuLink
+                as="button"
+                onClick={() => {
+                  localStorage.removeItem('user')
+                  navigate('/login', { replace: false })
+                }}
+              >
+                Выйти
+              </S.menuLink>
             </S.menuItem>
           </S.menuList>
         </S.navMenu>
