@@ -1,50 +1,58 @@
 import { useEffect, useState } from 'react'
 import * as S from './main.styles'
-import { tracks, playLists } from '../../data'
+import { playLists } from '../../data'
 import Navigation from '../../components/navmenu/NavMenu'
 import Player from '../../components/player/AudioPlayer'
 import Sidebar from '../../components/sidebar/Sidebar'
 import TrackList from '../../components/traklist/Tracklist'
+import { getTracks } from '../../api'
+import { useFetching } from '../../utils/hooks'
 
 function Main() {
   const [content, setContent] = useState({})
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
+  const [currentTrack, setCurrentTruck] = useState(null)
+  // const [newError, setNewError] = useState(null)
+
+  const [fetchTracks, loading, error] = useFetching(async () => {
+    const response = await getTracks()
+    setContent({
+      tracklist: response,
+      sidebar: playLists,
+    })
+  })
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setContent({
-        tracklist: tracks,
-        sidebar: playLists,
-        player: tracks[0],
-      })
-      setLoading(false)
-    }, 5000)
-    return () => clearTimeout(timer)
+    fetchTracks()
   }, [])
 
   return (
-      <S.wrapper>
-        <S.container>
-          <S.main>
-            <Navigation />
-            {loading && (
-              <>
-                <TrackList />
-                <Sidebar />
-                <Player />
-              </>
-            )}
-            {!loading && (
-              <>
-                <TrackList tracks={content.tracklist} />
-                <Sidebar array={content.sidebar} />
-                <Player prop={content.player} />
-              </>
-            )}
-          </S.main>
-          <footer className="footer" />
-        </S.container>
-      </S.wrapper>
+    <S.wrapper>
+      <S.container>
+        <S.main>
+          <Navigation />
+          {loading && (
+            <>
+              <TrackList />
+              <Sidebar />
+              <Player />
+            </>
+          )}
+          {!loading && (
+            <>
+              <TrackList
+                tracks={content.tracklist}
+                setTrack={setCurrentTruck}
+                error={error}
+              />
+              {!error && <Sidebar array={content.sidebar} />}
+              {currentTrack && <Player prop={currentTrack} />}
+            </>
+          )}
+        </S.main>
+        <footer className="footer" />
+      </S.container>
+    </S.wrapper>
   )
 }
 

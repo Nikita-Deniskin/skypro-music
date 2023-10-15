@@ -53,6 +53,7 @@ export default function Player({ prop }) {
                 <ButtonSVG name="dislike" />
               </S.trackPlayLikeDis>
             </S.playerTrackPlay>
+           {prop && ( <audio controls src={prop.track_file}>{' '}</audio>)}
           </S.barPlayer>
           <S.barVolumeBlock>
             <S.volumeContent>
