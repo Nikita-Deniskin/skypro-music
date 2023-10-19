@@ -10,10 +10,7 @@ import { useFetching } from '../../utils/hooks'
 
 function Main() {
   const [content, setContent] = useState({})
-  // const [loading, setLoading] = useState(true)
   const [currentTrack, setCurrentTruck] = useState(null)
-  // const [newError, setNewError] = useState(null)
-
   const [fetchTracks, loading, error] = useFetching(async () => {
     const response = await getTracks()
     setContent({
@@ -46,7 +43,7 @@ function Main() {
                 error={error}
               />
               {!error && <Sidebar array={content.sidebar} />}
-              {currentTrack && <Player prop={currentTrack} />}
+              {currentTrack && <Player prop={currentTrack} setTrack={setCurrentTruck}/>}
             </>
           )}
         </S.main>

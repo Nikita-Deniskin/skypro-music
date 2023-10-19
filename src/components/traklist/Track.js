@@ -24,7 +24,7 @@ export default function TrackListContent({ tracks, setTrack }) {
                 )}
               </S.trackTitleImage>
               <div>
-                <S.trackTitleLink >
+                <S.trackTitleLink>
                   {prop ? prop.name : <Skeleton width={360} />}
                   {prop?.remix ? (
                     <S.trackTitleSpan>({prop.remix})</S.trackTitleSpan>

@@ -18,12 +18,67 @@ export const barContent = styled.div`
   flex-direction: column;
 `
 
-export const barPlayerProgress = styled.div`
-  width: 100%;
-  height: 5px;
-  background: #2e2e2e;
-`
+export const barPlayerProgress = styled.input`
+  --progress-height: 5px;
+  --progress-color: #b672ff;
+  --progress-bg-color: #2e2e2e;
 
+  margin: 0;
+  width: 100%;
+  height: var(--progress-height);
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+
+  &::-webkit-slider-runnable-track {
+    position: relative;
+    height: var(--progress-height);
+    background: var(--progress-bg-color);
+  }
+  &::-webkit-slider-thumb {
+    --thumb-height: 1px;
+    --thumb-width: 1px;
+    position: relative;
+    -webkit-appearance: none;
+    width: var(--thumb-width, var(--thumb-height));
+    box-shadow: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0
+      100vmax var(--progress-color);
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: var(--progress-bg-color);
+  }
+
+  /* FF */
+  &::-moz-range-track {
+    width: 100%;
+    height: var(--progress-height);
+    background: var(--progress-bg-color);
+    border: none;
+    border-radius: 0px;
+  }
+  &::-moz-range-thumb {
+    border: none;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  &::-moz-range-progress {
+    background-color: var(--progress-color);
+    height: var(--progress-height);
+  }
+`
+export const currentSpan = styled.span`
+  color: #696969;
+  text-align: right;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 16px;
+  line-height: 18px; /* 112.5% */
+  letter-spacing: 0.016px;
+`
 export const barPlayerBlock = styled.div`
   height: 73px;
   display: -webkit-box;
@@ -190,23 +245,36 @@ export const volumeProgress = styled.div`
 `
 
 export const volumeProgressLine = styled.input`
+  --progress-color: #b672ff;
+  --progress-bg-color: #2e2e2e;
+
   width: 109px;
+  height: 12px;
   cursor: pointer;
   -webkit-appearance: none;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+
+  &::-webkit-slider-runnable-track {
+    position: relative;
+    height: 2px;
+    border: none;
+    border-radius: 0.5em;
+    background: var(--progress-bg-color);
+    box-shadow: none;
+  }
+
   &::-webkit-slider-thumb {
+    position: relative;
     -webkit-appearance: none;
     width: 12px;
     height: 12px;
     border-radius: 6px;
     background: #1a1a1a;
     border: 2px solid #fff;
-    margin-top: calc(2px * 0.5 - max(10px * 0.5, 2px));
+    margin-top: calc(2px * 0.5 - max(12px * 0.5, 2px));
+
   }
-  &::-webkit-slider-runnable-track {
-    height: 2px;
-    border: none;
-    border-radius: 0.5em;
-    background: #797979;
-    box-shadow: none;
-  }
+  
 `
