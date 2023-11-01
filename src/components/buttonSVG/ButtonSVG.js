@@ -1,12 +1,11 @@
-import { useState } from 'react'
 import * as S from './ButtonSVG.styles'
 
-export default function ButtonSVG({ name, click, modification }) {
-  const [isActive, setIsActive] = useState(false)
+export default function ButtonSVG({ name, click, modification, isActive }) {
   return (
     <S.BtnDiv
-      onClick={() => {
-        setIsActive(!isActive);
+      onClick={(e) => {
+        e.stopPropagation()
+        // setIsActive(!isActive);
         click();
       }}
       $style={modification || name}

@@ -1,20 +1,27 @@
-import * as S from '../main/main.styles'
-import Navigation from '../../components/navmenu/NavMenu'
-import Player from '../../components/player/AudioPlayer'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import TrackList from '../../components/traklist/Tracklist'
+import { useGetFavoritesQuery } from '../../services/AuthorizedRequestService'
+import { setCurrentPage } from '../../store/slices/tracksSlice'
 
 function Favorites() {
+  const dispatch = useDispatch()
+  const { data, error, isLoading } = useGetFavoritesQuery()
+  useEffect(() => {
+    if (data) dispatch(setCurrentPage('Favorites'))
+  }, [data])
+
   return (
-    <S.wrapper>
-      <S.container>
-        <S.main>
-          <Navigation />
-          <TrackList title="Мои треки" />
-          <Player />
-        </S.main>
-        <footer className="footer" />
-      </S.container>
-    </S.wrapper>
+    <>
+      <TrackList
+        title="Мои треки"
+        tracks={data}
+        error={error}
+        isLoading={isLoading}
+      />
+      {isLoading && <div>Загрузка...</div>}
+      {error && <div>Ошибка...{error}</div>}
+    </>
   )
 }
 
