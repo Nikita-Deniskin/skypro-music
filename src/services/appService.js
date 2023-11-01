@@ -14,7 +14,7 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
-  if (result?.error?.status === 401) {
+  if (result?.error?.status === 401 && api.endpoint !== "getRegistration") {
     const authData = api.getState().auth
     const refreshResult = await baseQuery(
       {
@@ -31,7 +31,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       extraOptions
     )
     if (refreshResult.data) {
-      api.dispatch(setTokens({access: refreshResult.data.access, refresh: authData.refresh }))
+      api.dispatch(
+        setTokens({
+          access: refreshResult.data.access,
+        })
+      )
       result = await baseQuery(args, api, extraOptions)
     } else {
       api.dispatch(setAuth(null))
@@ -39,13 +43,29 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   }
   return result
 }
+
 export const authorizedApi = createApi({
   reducerPath: 'authorizedApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Tracks', 'Favorites'
-  // , 'Current'
-],
+  tagTypes: ['Tracks', 'Favorites', 'Selections'],
+
   endpoints: (build) => ({
+    getRegistration: build.mutation({
+      query: ({ data, url }) => ({
+        url: `user/${url}/`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+
+    getTokens: build.mutation({
+      query: (userData) => ({
+        url: `user/token/`,
+        method: 'POST',
+        body: userData,
+      }),
+    }),
+
     fetchAllTrucks: build.query({
       query: () => `catalog/track/all/`,
       providesTags: (result) =>
@@ -68,9 +88,14 @@ export const authorizedApi = createApi({
     }),
     getSelections: build.query({
       query: (id) => `catalog/selection/${id}/`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.items.map(({ id }) => ({ type: 'Selections', id })),
+              { type: 'Selections', id: 'LIST' },
+            ]
+          : [{ type: 'Selections', id: 'LIST' }],
     }),
-
-
     addToFavorites: build.mutation({
       query: (id) => ({
         url: `catalog/track/${id}/favorite/`,
@@ -79,7 +104,7 @@ export const authorizedApi = createApi({
       invalidatesTags: [
         { type: 'Favorites', id: 'LIST' },
         { type: 'Tracks', id: 'LIST' },
-        // 'Current'
+        { type: 'Selections', id: 'LIST' },
       ],
     }),
     removeFromFavorites: build.mutation({
@@ -90,17 +115,18 @@ export const authorizedApi = createApi({
       invalidatesTags: [
         { type: 'Favorites', id: 'LIST' },
         { type: 'Tracks', id: 'LIST' },
-        // 'Current'
+        { type: 'Selections', id: 'LIST' },
       ],
     }),
   }),
 })
 
 export const {
+  useGetRegistrationMutation,
+  useGetTokensMutation,
   useFetchAllTrucksQuery,
   useGetFavoritesQuery,
   useAddToFavoritesMutation,
   useRemoveFromFavoritesMutation,
-  useGetSelectionsQuery
-  // useGetCurrentQuery
+  useGetSelectionsQuery,
 } = authorizedApi

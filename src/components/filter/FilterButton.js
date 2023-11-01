@@ -5,6 +5,7 @@ export default function FilterCategory({
   content,
   isActive,
   setActive,
+  selected
 }) {
   const toggleVisibility = () => setActive(isActive === title ? '' : title)
   return (
@@ -16,6 +17,7 @@ export default function FilterCategory({
       >
         {title}
       </S.filterButton>
+      {selected > 0 && (<S.selectedFilterItems>{selected}</S.selectedFilterItems>)}
       {isActive === title && (
         <S.filterPopup className="menu">
           <S.filterList>{content}</S.filterList>

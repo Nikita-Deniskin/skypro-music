@@ -27,6 +27,8 @@ const btnMargins = {
   `,
   like: css`
     padding: 5px;
+    margin-left: 28.5px;
+
   `,
   dislike: css`
     margin-left: 28.5px;

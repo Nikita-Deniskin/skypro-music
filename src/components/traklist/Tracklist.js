@@ -1,18 +1,20 @@
-import { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AuthContext } from '../context/context'
-import { setCurrentTruck } from '../../store/slices/tracksSlice'
+import {
+  setCurrentTruck,
+  selectFilterItem,
+} from '../../store/slices/tracksSlice'
 import * as S from './Tracklist.styles'
 import Filter from '../filter/Filter'
 import { ListItem } from './Track'
 
-
-
-const TrackList = ({ title, tracks, error, isLoading }) => {
-  const { isAuth } = useContext(AuthContext)
+const TrackList = ({ title, allTracks, error, isLoading }) => {
+  const userId = useSelector((state) => state.auth.id)
   const dispatch = useDispatch()
   const currentTrack = useSelector((state) => state.tracks.currentTrack)
   const isPlaying = useSelector((state) => state.tracks.isPlaying)
+  const filteredTracks = useSelector((state) => state.tracks.filteredTracks)
+  const filterIsActive = useSelector((state) => state.tracks.filter)
+  const tracks = filterIsActive ? filteredTracks : allTracks
 
   return (
     <S.mainCentalBlock>
@@ -25,10 +27,17 @@ const TrackList = ({ title, tracks, error, isLoading }) => {
           type="search"
           placeholder="Поиск"
           name="search"
+          onChange={(e) =>
+            dispatch(
+              selectFilterItem({
+                search: e.target.value === '' ? 'clear' : e.target.value,
+              })
+            )
+          }
         />
       </S.centalBlockSearch>
       <S.centalBlockH2>{title || 'Треки'}</S.centalBlockH2>
-      {!title && <Filter />}
+      {!title && allTracks && <Filter tracks={allTracks} />}
       <S.centalBlockContent>
         <S.contentTitle className="playlist-title">
           <S.playlistTitleCol01>ТРЕК</S.playlistTitleCol01>
@@ -50,7 +59,7 @@ const TrackList = ({ title, tracks, error, isLoading }) => {
             Array(10)
               .fill()
               .map(() => <ListItem key={Math.random()} />)}
-          {tracks &&
+          {tracks?.length > 0 ? (
             tracks.map((track) => (
               <ListItem
                 key={track.id}
@@ -61,10 +70,20 @@ const TrackList = ({ title, tracks, error, isLoading }) => {
                 isLiked={
                   title === 'Мои треки'
                     ? true
-                    : track.stared_user?.find((item) => item.id === isAuth.id)
+                    : track.stared_user?.find((item) => item.id === userId)
                 }
               />
-            ))}
+            ))
+          ) : (
+            <S.filterNotFound>
+              Tреков, соответствующих вашему запросу, не найдено
+              <img
+                src="/img/smile_crying.png"
+                alt="crying"
+                style={{ width: 52, height: 52 }}
+              />
+            </S.filterNotFound>
+          )}
         </S.contentPlaylist>
       </S.centalBlockContent>
     </S.mainCentalBlock>

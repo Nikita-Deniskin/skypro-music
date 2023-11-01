@@ -59,6 +59,7 @@ export const searchText = styled.input`
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
+  outline: none;
   &::-webkit-input-placeholder {
     background-color: transparent;
     color: #ffffff;
@@ -150,4 +151,21 @@ export const playlistTitleSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+`
+export const filterNotFound = styled.div`
+width: 100%;
+margin-top: 50px;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-ms-flex-direction: row;
+flex-direction: row;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+line-height: 30px;
 `

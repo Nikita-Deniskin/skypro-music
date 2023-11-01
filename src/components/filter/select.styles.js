@@ -8,10 +8,11 @@ export const filterCategory = styled.div`
     margin-right: 10px;
   }
 `
-export const filterButton = styled.button`
+export const select = styled.select`
+-moz-appearance: none;
+-webkit-appearance: none;
+appearance: none;
   font-size: 16px;
-  line-height: 24px; /* 112.5% */
-letter-spacing: 0.016px;
   background: transparent;
   border: 1px solid #ffffff;
   border-radius: 60px;
@@ -66,20 +67,4 @@ export const filterList = styled.ul`
     background-color: white;
     height: 65px;
   }
-`
-export const selectedFilterItems = styled.div`
-  background-color: #ad61ff;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  right: -8px;
-  top: -8px;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 13px; /* 100% */
 `

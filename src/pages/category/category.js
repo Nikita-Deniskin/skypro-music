@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { playLists } from '../../data'
 import TrackList from '../../components/traklist/Tracklist'
-import { useGetSelectionsQuery } from '../../services/AuthorizedRequestService'
+import { useGetSelectionsQuery } from '../../services/appService'
 import { setCurrentPage } from '../../store/slices/tracksSlice'
 
 const Categories = () => {
@@ -20,11 +20,11 @@ const Categories = () => {
   return (
     <TrackList
       title={currentPlayList.name}
-      tracks={data?.items}
+      allTracks={data?.items}
       error={error}
       isLoading={isLoading}
     />
   )
 }
 
-export default Categories
+export { Categories }

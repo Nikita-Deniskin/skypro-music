@@ -10,7 +10,7 @@ export const centerblockFilter = styled.div `
   flex-direction: row;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 51px;
 `
 export const filterTitle = styled.div `
@@ -22,7 +22,7 @@ export const filterTitle = styled.div `
 `
 export const filterItem = styled.li`
   font-family: 'StratosSkyeng', sans-serif;
-  color: #fff;
+  color: ${(props) => (props.$isSelected ? '#b672ff' : 'white')};
   font-variant-numeric: lining-nums proportional-nums;
   font-size: 20px;
   font-style: normal;

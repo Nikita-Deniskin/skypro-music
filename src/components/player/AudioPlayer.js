@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import {
   useAddToFavoritesMutation,
   useRemoveFromFavoritesMutation,
-} from '../../services/AuthorizedRequestService'
+} from '../../services/appService'
 import ButtonSVG from '../buttonSVG/ButtonSVG'
 import { ProgressBar } from './ProgressBar'
 import { VolumeRange } from '../volumeRange/volumeRange'
@@ -13,20 +13,29 @@ import {
   setIsPlaying,
   setCurrentTruck,
   toggleShuffle,
+  setCurrentIsLiked,
 } from '../../store/slices/tracksSlice'
 
-export default function Player({ currentTrack, loading, isLiked }) {
+export default function Player({ currentTrack, loading }) {
   const dispatch = useDispatch()
+
+  const liked = useSelector((state) => state.tracks.currentIsLiked)
   const isPlaying = useSelector((state) => state.tracks.isPlaying)
   const isShuffled = useSelector((state) => state.tracks.shuffled)
+  // const likedTraks = useSelector((state) => state.tracks.allTracks)
   const [timeProgress, setTimeProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const audioRef = useRef()
   const [like] = useAddToFavoritesMutation()
   const [dislike] = useRemoveFromFavoritesMutation()
-  
-  const [liked, setLiked] = useState(isLiked)
-  const toggleLike = (id) => {if (liked) {dislike(id)} else {like(id)} setLiked(!liked)}
+  const toggleLike = (id) => {
+    if (liked) {
+      dislike(id)
+    } else {
+      like(id)
+    }
+    dispatch(setCurrentIsLiked(!liked))
+  }
   const handleStart = () => {
     audioRef.current.play()
   }
@@ -41,7 +50,6 @@ export default function Player({ currentTrack, loading, isLiked }) {
     }
     dispatch(setIsPlaying(!isPlaying))
   }
-
   const onLoadedMetadata = () => {
     setDuration(audioRef.current.duration)
   }
@@ -53,7 +61,6 @@ export default function Player({ currentTrack, loading, isLiked }) {
     setIsCycled(!isCycled)
     audioRef.current.loop = !isCycled
   }
-  // console.debug(isLiked)
 
   useEffect(() => {
     if (currentTrack) {
@@ -142,7 +149,7 @@ export default function Player({ currentTrack, loading, isLiked }) {
               </S.trackPlayContain>
               <S.trackPlayLikeDis>
                 <ButtonSVG
-                  name={isLiked ? 'dislike' : 'like'}
+                  name={liked ? 'dislike' : 'like'}
                   click={() => {
                     toggleLike(currentTrack.id)
                   }}
