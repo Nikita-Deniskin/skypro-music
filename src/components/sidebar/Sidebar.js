@@ -1,27 +1,11 @@
-import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useSelector } from 'react-redux'
 import * as S from './Sidebar.styles'
-import { AuthContext } from '../context/context'
 
-export default function Sidebar({ array, error, logout }) {
-  const { isAuth, isLoading } = useContext(AuthContext)
-  const listItems = array
-    ? array.map((item) => (
-        <S.sidebarItem key={item.id}>
-          <NavLink to={`/category/${item.id}`}>
-            <S.sidebarImg src={item.src} alt="day's playlist" />
-          </NavLink>
-        </S.sidebarItem>
-      ))
-    : Array(3)
-        .fill()
-        .map(() => (
-          <S.sidebarItem key={Math.random()}>
-            <Skeleton />
-          </S.sidebarItem>
-        ))
+export default function Sidebar({ array, logout, loading }) {
+  const userName = useSelector((state) => state.auth.username)
   return (
     <S.mainSidebar className="sidebar">
       <SkeletonTheme
@@ -31,17 +15,32 @@ export default function Sidebar({ array, error, logout }) {
         width={250}
       >
         <S.sidebarPersonal>
-          <S.sidebarPersonalName>
-            {isLoading ? <Skeleton height={19} width={200} /> : isAuth.username}
-          </S.sidebarPersonalName>
+          <S.sidebarPersonalName>{userName}</S.sidebarPersonalName>
           <S.sidebarIcon>
             <svg alt="logout" onClick={logout}>
-              <use xlinkHref="img/icon/sprite.svg#logout" />
+              <use xlinkHref="/img/icon/sprite.svg#logout" />
             </svg>
           </S.sidebarIcon>
         </S.sidebarPersonal>
         <S.sidebarBlock>
-          {!error && <S.sidebarList>{listItems}</S.sidebarList>}
+          <S.sidebarList>
+            {loading &&
+              Array(3)
+                .fill()
+                .map(() => (
+                  <S.sidebarItem key={Math.random()}>
+                    <Skeleton />
+                  </S.sidebarItem>
+                ))}
+            {array &&
+              array.map((item) => (
+                <S.sidebarItem key={item.id}>
+                  <NavLink to={`/category/${item.id}`}>
+                    <S.sidebarImg src={item.src} alt={item.name} />
+                  </NavLink>
+                </S.sidebarItem>
+              ))}
+          </S.sidebarList>
         </S.sidebarBlock>
       </SkeletonTheme>
     </S.mainSidebar>

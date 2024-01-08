@@ -27,6 +27,7 @@ const btnMargins = {
   `,
   like: css`
     padding: 5px;
+    margin-left: 28.5px;
   `,
   dislike: css`
     margin-left: 28.5px;
@@ -89,7 +90,7 @@ const btnSvgSizes = {
     fill: transparent;
     stroke: #696969;
     &:hover {
-      fill: transparent;
+      fill: #696969;
     }
     &:active {
       fill: #696969;
@@ -101,7 +102,6 @@ const btnSvgSizes = {
     fill: transparent;
     stroke: #696969;
     &:hover {
-      fill: transparent;
     }
     &:active {
       fill: #696969;
@@ -122,7 +122,7 @@ const btnSvgSizes = {
     fill: ${(props) => (props.$active ? '#b672ff' : 'transparent')};
     stroke: ${(props) => (props.$active ? '#b672ff' : '#696969')};
     &:hover {
-      fill: none;
+      fill: #b672ff;
     }
     &:active {
       fill: #b672ff;

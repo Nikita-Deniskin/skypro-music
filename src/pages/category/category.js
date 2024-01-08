@@ -13,6 +13,7 @@ const Categories = () => {
     (playlist) => playlist.id === Number(params.id)
   )
   const { data, error, isLoading } = useGetSelectionsQuery(Number(params.id))
+  // console.debug(data)
   useEffect(() => {
     if (data) dispatch(setCurrentPage('Category'))
   }, [data, dispatch])
@@ -20,11 +21,11 @@ const Categories = () => {
   return (
     <TrackList
       title={currentPlayList.name}
-      tracks={data?.items}
+      allTracks={data?.items}
       error={error}
       isLoading={isLoading}
     />
   )
 }
 
-export default Categories
+export { Categories }

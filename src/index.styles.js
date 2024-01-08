@@ -29,13 +29,13 @@ ul li {
 
 @font-face {
   font-family: 'StratosSkyeng';
-  src: url('/fonts/StratosSkyeng.eot');
+  src: url('../public/fonts/StratosSkyeng.eot');
   src:
     local('StratosSkyeng'),
     local('StratosSkyeng'),
-    url('/fonts/StratosSkyeng.eot?#iefix') format('embedded-opentype'), 
-    url('/fonts/StratosSkyeng.woff2') format('woff2'),
-    url('/fonts/StratosSkyeng.woff') format('woff');
+    url('../public/fonts/StratosSkyeng.eot?#iefix') format('embedded-opentype'), 
+    url('../public/fonts/StratosSkyeng.woff2') format('woff2'),
+    url('../public/fonts/StratosSkyeng.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }

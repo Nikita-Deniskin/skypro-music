@@ -174,10 +174,12 @@ export const LoginRegistrationForm = ({
           name="control"
           placeholder="Повторите пароль"
           onBlur={(e) => blurHanndler(e)}
-          $error={regForm ? usedControlInput && controlError : apiErrors.detail}
-          />
+          $error={
+            regForm ? usedControlInput && controlError : apiErrors?.detail
+          }
+        />
       )}
-      {(regForm ? usedControlInput && controlError : apiErrors.detail) && (
+      {(regForm ? usedControlInput && controlError : apiErrors?.detail) && (
         <S.formError>{controlError}</S.formError>
       )}
       {/* {apiErrors && <S.apiError>{apiErrors.password[1]}</S.apiError>} */}

@@ -1,3 +1,4 @@
+// import { useEffect, useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import TrackList from '../../components/traklist/Tracklist'
@@ -15,7 +16,7 @@ function Favorites() {
     <>
       <TrackList
         title="Мои треки"
-        tracks={data}
+        allTracks={data}
         error={error}
         isLoading={isLoading}
       />
