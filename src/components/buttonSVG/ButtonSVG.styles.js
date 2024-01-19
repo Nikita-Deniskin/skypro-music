@@ -119,8 +119,8 @@ const btnSvgSizes = {
   tracklike: css`
     width: 14px;
     height: 12px;
-    fill: transparent;
-    stroke: #696969;
+    fill: ${(props) => (props.$active ? '#b672ff' : 'transparent')};
+    stroke: ${(props) => (props.$active ? '#b672ff' : '#696969')};
     &:hover {
       fill: none;
     }

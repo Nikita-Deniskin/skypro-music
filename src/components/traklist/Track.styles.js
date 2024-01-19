@@ -129,3 +129,19 @@ export const playingDot = styled.div`
   display: block;
   animation: ${ props => (props.$playing? animationMixin : "")};
 `
+
+export const contentPlaylist = styled.ul`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
+  max-height: 500px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`

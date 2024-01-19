@@ -6,7 +6,7 @@ const tracks = [
     album: 'Welcome Reality',
     isliked: false,
     time: '4:44',
-    genre: 'Альтернатива',
+    genre: 'Рок',
   },
   {
     id: 1,
@@ -15,7 +15,7 @@ const tracks = [
     album: 'Elektro',
     isliked: false,
     time: '2:22',
-    genre: 'Реп',
+    genre: 'Хип-хоп',
   },
   {
     id: 2,
@@ -96,17 +96,17 @@ const tracks = [
 ]
 const playLists = [
   {
-    id: 0,
+    id: 1,
     name: 'Плейлист дня',
     src: 'img/playlist01.png',
   },
   {
-    id: 1,
+    id: 2,
     name: '100 танцевальных хитов',
     src: 'img/playlist02.png',
   },
   {
-    id: 2,
+    id: 3,
     name: 'Инди-заряд',
     src: 'img/playlist03.png',
   },
