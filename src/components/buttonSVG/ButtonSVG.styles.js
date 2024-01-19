@@ -7,6 +7,9 @@ const btnMargins = {
   play: css`
     margin-right: 23px;
   `,
+  pause: css`
+  margin-right: 23px;
+`,
   next: css`
     margin-right: 28px;
     fill: #a53939;
@@ -61,6 +64,11 @@ const btnSvgSizes = {
     width: 22px;
     height: 20px;
   `,
+  pause: css`
+  width: 22px;
+height: 20px;
+flex-shrink: 0;
+  `,
   next: css`
     width: 15px;
     height: 14px;
@@ -69,13 +77,11 @@ const btnSvgSizes = {
     width: 18px;
     height: 12px;
     fill: transparent;
-    stroke: #696969;
   `,
   shuffle: css`
     width: 19px;
     height: 12px;
     fill: transparent;
-    stroke: #696969;
   `,
   like: css`
     width: 14px;
@@ -131,8 +137,8 @@ const btnSvgMixin = (name) => {
 }
 export const BtnSvg = styled.svg`
   fill: #d9d9d9;
-  stroke: #d9d9d9;
   transition: all 0.3s;
+  stroke: ${(props) => (props.$active ? '#FFFFFF' : '#696969')};
   &:hover {
     cursor: pointer;
     fill: #696969;

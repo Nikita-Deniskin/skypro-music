@@ -123,8 +123,7 @@ export const contentPlaylist = styled.ul`
     display: none;
   }
 `
-const playlistTitleColumn = styled.div`
-  .playlist-title__col {
+export const playlistTitleColumn = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -152,4 +151,3 @@ export const playlistTitleSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
-// 
