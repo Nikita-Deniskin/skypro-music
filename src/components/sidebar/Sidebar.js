@@ -5,7 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import * as S from './Sidebar.styles'
 import { AuthContext } from '../context/context'
 
-export default function Sidebar({ array, logout }) {
+export default function Sidebar({ array, error, logout }) {
   const { isAuth, isLoading } = useContext(AuthContext)
   const listItems = array
     ? array.map((item) => (
@@ -24,24 +24,26 @@ export default function Sidebar({ array, logout }) {
         ))
   return (
     <S.mainSidebar className="sidebar">
-      <S.sidebarPersonal>
-        <S.sidebarPersonalName>{isLoading? 'сукундочку...' : isAuth.username}</S.sidebarPersonalName>
-        <S.sidebarIcon>
-          <svg alt="logout" onClick={logout}>
-            <use xlinkHref="img/icon/sprite.svg#logout" />
-          </svg>
-        </S.sidebarIcon>
-      </S.sidebarPersonal>
-      <S.sidebarBlock>
-        <SkeletonTheme
-          baseColor="#313131"
-          highlightColor="#444"
-          height={150}
-          width={250}
-        >
-          <S.sidebarList>{listItems}</S.sidebarList>
-        </SkeletonTheme>
-      </S.sidebarBlock>
+      <SkeletonTheme
+        baseColor="#313131"
+        highlightColor="#444"
+        height={150}
+        width={250}
+      >
+        <S.sidebarPersonal>
+          <S.sidebarPersonalName>
+            {isLoading ? <Skeleton height={19} width={200} /> : isAuth.username}
+          </S.sidebarPersonalName>
+          <S.sidebarIcon>
+            <svg alt="logout" onClick={logout}>
+              <use xlinkHref="img/icon/sprite.svg#logout" />
+            </svg>
+          </S.sidebarIcon>
+        </S.sidebarPersonal>
+        <S.sidebarBlock>
+          {!error && <S.sidebarList>{listItems}</S.sidebarList>}
+        </S.sidebarBlock>
+      </SkeletonTheme>
     </S.mainSidebar>
   )
 }

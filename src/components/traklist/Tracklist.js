@@ -2,7 +2,7 @@ import * as S from './Tracklist.styles'
 import Filter from '../filter/Filter'
 import TrackListContent from './Track'
 
-export default function TrackList({ tracks, setTrack, title, error }) {
+export default function TrackList({ loading, title, error }) {
   return (
     <S.mainCentalBlock>
       <S.centalBlockSearch className="search">
@@ -30,13 +30,11 @@ export default function TrackList({ tracks, setTrack, title, error }) {
           </S.playlistTitleCol04>
         </S.contentTitle>
         <S.contentPlaylist className="playlist">
-          {error && <p style={{ color: 'red' }}>Не удалось загрузить плейлист, попробуйте позже: {error}</p>}
-          {!error &&
-            (tracks ? (
-              <TrackListContent tracks={tracks} setTrack={setTrack} />
-            ) : (
-              <TrackListContent />
-            ))}
+          {error? (
+            <p style={{ color: 'red' }}>
+              Не удалось загрузить плейлист, попробуйте позже: {error}
+            </p>
+          ) : (<TrackListContent loading={loading} />)}
         </S.contentPlaylist>
       </S.centalBlockContent>
     </S.mainCentalBlock>

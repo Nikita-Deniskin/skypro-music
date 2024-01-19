@@ -3,11 +3,12 @@ import * as S from './volumeRange.styles'
 
 export const VolumeRange = ({ audioRef }) => {
   const [volume, setVolume] = useState(50)
+
   useEffect(() => {
-    if (audioRef) {
+
       audioRef.current.volume = volume / 100
-    }
-  }, [volume, audioRef])
+
+  }, [volume, setVolume, audioRef])
 
   return (
     <S.volumeProgressLine

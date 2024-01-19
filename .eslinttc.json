@@ -26,6 +26,8 @@
     "react/destructuring-assignment": [0],
     "import/prefer-default-export": "off",
     "arrow-body-style": ["error", "as-needed"],
+    "default-param-last": "off",
+    "no-param-reassign": "off",
     "react/function-component-definition": [
       2,
       {
