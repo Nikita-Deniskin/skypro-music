@@ -1,29 +1,24 @@
 import { useRoutes } from 'react-router-dom'
+import { useContext } from 'react'
 import ProtectedRoute from './protected-route'
 import Main from '../../pages/main/main'
 import Favorites from '../../pages/favorites/favorites'
 import SignIn from '../../pages/sign/Signin'
-import SignUp from '../../pages/sign/Signup'
+import {SignUp} from '../../pages/sign/Signup'
 import NotFound from '../../pages/notfound/notfound'
 import Categories from '../../pages/category/category'
+import { AuthContext } from '../context/context'
 
 const AppRoutes = () => {
-  // const [user, setUser] = useState(() => {
-  //   try {
-  //     return JSON.parse(localStorage.getItem('user'))
-  //   } catch (error) {
-  //     return null
-  //   }
-  // })
-  const handleLogin = (data) => {
-    localStorage.setItem('user', JSON.stringify(data))
-    // setUser(JSON.parse(localStorage.getItem('user')))
-  }
+  const {isAuth, isLoading} = useContext(AuthContext)
+  // console.log(isAuth);
+  
   const element = useRoutes([
-    { path: '/login', element: <SignIn onAuthButtonClick={handleLogin} /> },
+
+    { path: '/login', element: <SignIn/> },
     { path: '/signup', element: <SignUp /> },
     {
-      element: <ProtectedRoute isAllowed={Boolean(JSON.parse(localStorage.getItem('user')))} />,
+      element: <ProtectedRoute isAllowed={isAuth !== null || isLoading} />,
       children: [
         { path: '/', element: <Main /> },
         { path: '/favorites', element: <Favorites /> },

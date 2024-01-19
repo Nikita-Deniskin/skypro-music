@@ -1,10 +1,12 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import * as S from './Sidebar.styles'
+import { AuthContext } from '../context/context'
 
-export default function Sidebar({ array }) {
-  const navigate = useNavigate()
+export default function Sidebar({ array, logout }) {
+  const { isAuth, isLoading } = useContext(AuthContext)
   const listItems = array
     ? array.map((item) => (
         <S.sidebarItem key={item.id}>
@@ -23,15 +25,9 @@ export default function Sidebar({ array }) {
   return (
     <S.mainSidebar className="sidebar">
       <S.sidebarPersonal>
-        <S.sidebarPersonalName>Sergey.Ivanov</S.sidebarPersonalName>
+        <S.sidebarPersonalName>{isLoading? 'сукундочку...' : isAuth.username}</S.sidebarPersonalName>
         <S.sidebarIcon>
-          <svg
-            alt="logout"
-            onClick={() => {
-              localStorage.removeItem('user')
-              navigate('/login', { replace: true })
-            }}
-          >
+          <svg alt="logout" onClick={logout}>
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>
         </S.sidebarIcon>

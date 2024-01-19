@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as S from './NavMenu.styles'
 
-export default function Navigation() {
+export default function Navigation({logout}) {
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
   const toggleVisibility = () => setVisible(!visible)
@@ -38,10 +38,7 @@ export default function Navigation() {
             <S.menuItem>
               <S.menuLink
                 as="button"
-                onClick={() => {
-                  localStorage.removeItem('user')
-                  navigate('/login', { replace: false })
-                }}
+                onClick={logout}
               >
                 Выйти
               </S.menuLink>
