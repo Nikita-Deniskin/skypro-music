@@ -97,14 +97,17 @@ const tracks = [
 const playLists = [
   {
     id: 0,
+    name: 'Плейлист дня',
     src: 'img/playlist01.png',
   },
   {
     id: 1,
+    name: '100 танцевальных хитов',
     src: 'img/playlist02.png',
   },
   {
     id: 2,
+    name: 'Инди-заряд',
     src: 'img/playlist03.png',
   },
 ]

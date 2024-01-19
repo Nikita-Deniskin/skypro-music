@@ -11,6 +11,8 @@ export const navLogo = styled.div`
   padding: 13px 0 13px 0;
   background-color: transparent;
   margin-bottom: 20px;
+  border: none;
+  cursor:pointer;
 `
 
 export const navBurger = styled.button`
@@ -63,4 +65,7 @@ export const menuLink = styled.a`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `
