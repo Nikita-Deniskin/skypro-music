@@ -7,12 +7,11 @@ import { setCurrentPage } from '../../store/slices/tracksSlice'
 function Main() {
   const dispatch = useDispatch()
   const { data, error, isLoading } = useFetchAllTrucksQuery()
+
   useEffect(() => {
-    if(data) dispatch(setCurrentPage('Main'))
+    if (data) dispatch(setCurrentPage('Main'))
   }, [data])
-
-
-  return <TrackList tracks={data} error={error} isLoading={isLoading} />
+  return <TrackList allTracks={data} error={error} isLoading={isLoading} />
 }
 
 export default Main
